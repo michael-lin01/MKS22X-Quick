@@ -1,7 +1,9 @@
 import java.util.Random;
+import java.util.Arrays;
 
 public class Quick{
   public static int partition(int[] data, int start, int end){
+    if(start==end) return start;
     Random r = new Random();
     int pivot = start+Math.abs(r.nextInt())%(end-start);
     //System.out.println(data[pivot]);
@@ -39,12 +41,18 @@ public class Quick{
   public static int quickselect(int[] data, int k){
     int start = 0;
     int end = data.length-1;
-    
+
     while(true){
       int pivot = partition(data,start,end);
       if(k==pivot) return data[pivot];
       if(k<pivot) end = pivot-1;
       else start = pivot+1;
     }
+  }
+
+  public static void main(String args[]){
+    int[] ary = {43,52,99,10,1,20};
+    System.out.println(quickselect(ary,3));
+    System.out.println(Arrays.toString(ary));
   }
 }
