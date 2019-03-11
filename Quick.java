@@ -37,11 +37,14 @@ public class Quick{
   }
 
   public static int quickselect(int[] data, int k){
-    while(
-      int pivot = partition(data,0,data.length-1);
-      if(k==pivot){
-        return data[pivot];
-      }
+    int start = 0;
+    int end = data.length-1;
+    
+    while(true){
+      int pivot = partition(data,start,end);
+      if(k==pivot) return data[pivot];
+      if(k<pivot) end = pivot-1;
+      else start = pivot+1;
     }
   }
 }
