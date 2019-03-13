@@ -34,13 +34,13 @@ public class Quick{
   }
 
   public static int partitionImp(int[] data, int start, int end){
-    if(start==end) return start;
+    //if(start==end) return start;
     Random r = new Random();
     int middle = (start+end)/2;
     int pivot = start;
     int med = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
     if(med == data[end]) pivot = end;
-    else pivot = middle;
+    if(med == data[middle]) pivot = middle;
 
     //System.out.println(data[pivot]);
     swap(data,start,pivot);
@@ -53,10 +53,10 @@ public class Quick{
       }
       else {
         if(data[start]>data[pivot]){ //if value is greater than pivot
-        swap(data,start,end);
-        end--;
-      }
-      else start++;
+          swap(data,start,end);
+          end--;
+        }
+        else start++;
       }
     }
 
@@ -65,6 +65,17 @@ public class Quick{
     pivot = end;
 
     return pivot;
+  }
+
+  private int[] partitionDutch(int[] data, int start, int end){
+    int middle = (start+end)/2;
+    int pivot = start;
+    int med = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
+    if(med == data[end]) pivot = end;
+    else pivot = middle;
+
+
+    return new int[] {1,2};
   }
 
   public static int quickselect(int[] data, int k){
@@ -85,7 +96,7 @@ public class Quick{
 
   private static void quicksort(int[] data, int start, int end){
     if(start<end){
-      int pivot = partition(data,start,end);
+      int pivot = partitionImp(data,start,end);
       quicksort(data,0,pivot-1);
       quicksort(data,pivot+1,end);
     }
@@ -93,12 +104,13 @@ public class Quick{
 
   public static void main(String args[]){
     Random r = new Random();
-    int[] ary = new int[20];
+    int[] ary = new int[100];
     for(int i = 0; i < ary.length;i++){
-      ary[i]=r.nextInt(2);
+      ary[i]=r.nextInt(1000);
     }
     //System.out.println(quickselect(ary,3));
     quicksort(ary);
+    //Arrays.sort(ary);
     System.out.println(Arrays.toString(ary));
 
   }
