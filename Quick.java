@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Quick{
 
   private static void swap(int[] data, int a, int b){
@@ -13,9 +12,9 @@ public class Quick{
     //start = starting index in group of pivot values
     //current = index of value you are currently looking at and comparing to pivot
     //end = last index not checked yet
+
     int middle = (start+end)/2;
     int pivot = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
-
     int current = start;
 
     while(current<=end){
@@ -26,7 +25,7 @@ public class Quick{
         if(data[current]>pivot){ //if value is greater than pivot
           swap(data,current,end--); //swap to end and decrease end
         }
-        else current++;
+        else current++; //if equal to pivot then just check next value
       }
     }
 
