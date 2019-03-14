@@ -1,5 +1,5 @@
-import java.util.Random;
-import java.util.Arrays;
+import java.util.*;
+
 
 public class Quick{
 
@@ -28,19 +28,16 @@ public class Quick{
     }
     if(data[end]>data[pivot]) end--;
     swap(data,pivot,end);
-    pivot = end;
 
-    return pivot;
+    return end;
   }
+
 
   public static int partitionImp(int[] data, int start, int end){
     //if(start==end) return start;
-    Random r = new Random();
     int middle = (start+end)/2;
-    int pivot = start;
     int med = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
-    if(med == data[end]) pivot = end;
-    if(med == data[middle]) pivot = middle;
+    int pivot = med == data[end] ? end : med == data[middle] ? middle : start;
 
     //System.out.println(data[pivot]);
     swap(data,start,pivot);
@@ -48,7 +45,10 @@ public class Quick{
     start++;
     while(start!=end){
       if(data[start]==data[pivot]){
-        if(r.nextInt(2)==0) swap(data, start,end);
+        if(Math.random()<0.5) {
+          swap(data, start,end);
+          end--;
+        }
         else start++;
       }
       else {
@@ -62,10 +62,10 @@ public class Quick{
 
     if(data[end]>data[pivot]) end--;
     swap(data,pivot,end);
-    pivot = end;
 
-    return pivot;
+    return end;
   }
+
 
   private int[] partitionDutch(int[] data, int start, int end){
     int middle = (start+end)/2;
@@ -106,8 +106,10 @@ public class Quick{
     Random r = new Random();
     int[] ary = new int[100];
     for(int i = 0; i < ary.length;i++){
-      ary[i]=r.nextInt(1000);
+      ary[i]=r.nextInt(10);
     }
+
+    System.out.println(Arrays.toString(ary));
     //System.out.println(quickselect(ary,3));
     quicksort(ary);
     //Arrays.sort(ary);
