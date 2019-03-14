@@ -71,27 +71,27 @@ public class Quick{
 
 
   private int[] partitionDutch(int[] data, int start, int end){
-    
+    //start = starting index in group of pivot values
+    //current = index of value you are currently looking at and comparing to pivot
+    //end = last index in group of pivot values
     int middle = (start+end)/2;
-    if(data[middle]<=data[start]&&data[middle]>=data[end]||
-       data[middle]>=data[start]&&data[middle]<=data[end]) swap(data,start,middle);
-    else{
-      if(data[end]<=data[start]&&data[end]>=data[middle]||
-         data[end]>=data[start]&&data[end]<=data[middle]) swap(data,start,end);
-    }
     
-    int med = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
-    int mid = start;
-    int pivot = start++;
+    int pivot = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
+    int current = start;
     
-    
-    while(start<=end){
-      if(data[start]<data[pivot]){
-        swap(data,start,)
+    while(current<=end){
+      if(data[current]<pivot){ //if less than pivot
+        swap(data,current++,start++); //swap to front of group of pivots and increment the start
+        else{ 
+          if(data[current]>pivot){ //if value is greater than pivot
+            swap(data,current,end--); //swap to end and decrease end
+          }
+          else current++
+        }
       }
     }
 
-    return new int[] {1,2};
+    return new int[] {start,end};
   }
 
   public static int quickselect(int[] data, int k){
@@ -99,10 +99,10 @@ public class Quick{
     int end = data.length-1;
 
     while(true){
-      int pivot = partitionImp(data,start,end);
-      if(k==pivot) return data[pivot];
-      if(k<pivot) end = pivot-1;
-      else start = pivot+1;
+      int[] pivot = partitionDutch(data,start,end);
+      if(k>=pivot[0]||k<=pivot[1]) return data[k];
+      if(k<pivot[0]) end = pivot[0]-1;
+      else start = pivot[1]+1;
     }
   }
 
@@ -112,9 +112,9 @@ public class Quick{
 
   private static void quicksort(int[] data, int start, int end){
     if(start<end){
-      int pivot = partitionImp(data,start,end);
-      quicksort(data,0,pivot-1);
-      quicksort(data,pivot+1,end);
+      int[] pivot = partitionDutch(data,start,end);
+      quicksort(data,0,pivot[0]-1);
+      quicksort(data,pivot[1]+1,end);
     }
   }
 
