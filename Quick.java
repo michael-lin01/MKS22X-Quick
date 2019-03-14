@@ -36,12 +36,15 @@ public class Quick{
   public static int partitionImp(int[] data, int start, int end){
     //if(start==end) return start;
     int middle = (start+end)/2;
-    int med = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
-    int pivot = med == data[end] ? end : med == data[middle] ? middle : start;
+    if(data[middle]<=data[start]&&data[middle]>=data[end]||
+       data[middle]>=data[start]&&data[middle]<=data[end]) swap(data,start,middle);
+    else{
+      if(data[end]<=data[start]&&data[end]>=data[middle]||
+         data[end]>=data[start]&&data[end]<=data[middle]) swap(data,start,end);
+    }
 
     //System.out.println(data[pivot]);
-    swap(data,start,pivot);
-    pivot=start;
+    int pivot=start;
     start++;
     while(start!=end){
       if(data[start]==data[pivot]){
@@ -68,12 +71,25 @@ public class Quick{
 
 
   private int[] partitionDutch(int[] data, int start, int end){
+    
     int middle = (start+end)/2;
-    int pivot = start;
+    if(data[middle]<=data[start]&&data[middle]>=data[end]||
+       data[middle]>=data[start]&&data[middle]<=data[end]) swap(data,start,middle);
+    else{
+      if(data[end]<=data[start]&&data[end]>=data[middle]||
+         data[end]>=data[start]&&data[end]<=data[middle]) swap(data,start,end);
+    }
+    
     int med = Math.max(Math.min(data[start],data[middle]) , Math.min(Math.max(data[start],data[middle]), data[end])); //max of the 2 smallest
-    if(med == data[end]) pivot = end;
-    else pivot = middle;
-
+    int mid = start;
+    int pivot = start++;
+    
+    
+    while(start<=end){
+      if(data[start]<data[pivot]){
+        swap(data,start,)
+      }
+    }
 
     return new int[] {1,2};
   }
@@ -104,7 +120,7 @@ public class Quick{
 
   public static void main(String args[]){
     Random r = new Random();
-    int[] ary = new int[100];
+    int[] ary = new int[50];
     for(int i = 0; i < ary.length;i++){
       ary[i]=r.nextInt(10);
     }
