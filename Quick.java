@@ -61,11 +61,27 @@ public class Quick{
     insertionSort(data);
   }
 
+  //bounded insertion sort
+  public static void insertionSort(int[] data, int lo, int hi){
+    for (int i = lo+1; i<=hi;i++){
+      int x = data[i];
+      int n = i;
+      while (n > lo && x < data[n-1]){
+        data[n]=data[n-1];
+        n--;
+      }
+      data[n]=x;
+    }
+  }
+
   private static void quicksort(int[] data, int start, int end){
-    if(start+50<end){
+    if(start+100<end){
       int[] pivot = partitionDutch(data,start,end);
       quicksort(data,start,pivot[0]-1);
       quicksort(data,pivot[1]+1,end);
+    }
+    else{
+      insertionSort(data,start,end);
     }
   }
 
