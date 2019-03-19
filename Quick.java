@@ -53,7 +53,7 @@ public class Quick{
     for (int i = lo+1; i<=hi;i++){
       int x = data[i];
       int n = i;
-      while (n > 0 && x < data[n-1]){
+      while (n > lo && x < data[n-1]){
         data[n]=data[n-1];
         n--;
       }
