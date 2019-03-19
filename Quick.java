@@ -44,12 +44,25 @@ public class Quick{
     }
   }
 
+  public static void insertionSort(int[] data){
+    for (int i = 1; i<data.length;i++){
+      int x = data[i];
+      int n = i;
+      while (n > 0 && x < data[n-1]){
+        data[n]=data[n-1];
+        n--;
+      }
+      data[n]=x;
+    }
+  }
+
   public static void quicksort(int[] data){
     quicksort(data,0,data.length-1);
+    insertionSort(data);
   }
 
   private static void quicksort(int[] data, int start, int end){
-    if(start<end){
+    if(start+50<end){
       int[] pivot = partitionDutch(data,start,end);
       quicksort(data,start,pivot[0]-1);
       quicksort(data,pivot[1]+1,end);
