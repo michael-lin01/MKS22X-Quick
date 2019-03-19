@@ -58,7 +58,6 @@ public class Quick{
 
   public static void quicksort(int[] data){
     quicksort(data,0,data.length-1);
-    insertionSort(data);
   }
 
   //bounded insertion sort
